@@ -56,7 +56,13 @@ class ThreeScene extends Component{
     let holes = []
     let triangles, mesh;
     let geometry = new THREE.Geometry();
-    let material = new THREE.MeshNormalMaterial()
+    // let material = new THREE.MeshNormalMaterial()
+    let material = new THREE.MeshBasicMaterial({
+        color: 0xff0000,
+        wireframe: true
+    });
+
+
     geometry.vertices = vertices;
 
     triangles = THREE.ShapeUtils.triangulateShape ( vertices, holes );
