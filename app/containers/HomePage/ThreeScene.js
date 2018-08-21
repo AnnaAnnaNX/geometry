@@ -28,18 +28,65 @@ class ThreeScene extends Component{
     this.renderer.setClearColor('#000000')
     this.renderer.setSize(width, height)
     this.mount.appendChild(this.renderer.domElement)
-    //ADD CUBE
-    const geometry = new THREE.BoxGeometry(this.state.width, this.state.height, this.state.long)
-    const material = new THREE.MeshBasicMaterial({ color: '#433F81'     })
-    this.cube = new THREE.Mesh(geometry, material)
+    // //ADD CUBE
+    // const geometry = new THREE.BoxGeometry(this.state.width, this.state.height, this.state.long)
+    // const material = new THREE.MeshBasicMaterial({ color: '#433F81'     })
+    // this.cube = new THREE.Mesh(geometry, material)
     
 
-    console.log('this.cube.position',this.cube.position)//!position
-    console.log('this.cube',this.cube)//!matrix
-    console.log('this.cube.toJSON()',this.cube.toJSON())//!matrix
+    // console.log('this.cube.position',this.cube.position)//!position
+    // console.log('this.cube',this.cube)//!matrix
+    // console.log('this.cube.toJSON()',this.cube.toJSON())//!matrix
+
+    // this.scene.add(this.cube)
 
 
-    this.scene.add(this.cube)
+
+    //ADD SHAPE FROM POINTS
+    let vertices = [
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(1, 0, 0),
+      new THREE.Vector3(1, 1, 0),
+      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(0, 0, 1),
+      new THREE.Vector3(1, 0, 1),
+      new THREE.Vector3(1, 1, 1),
+      new THREE.Vector3(0, 1, 1),
+    ]
+    let holes = []
+    let triangles, mesh;
+    let geometry = new THREE.Geometry();
+    let material = new THREE.MeshNormalMaterial()
+    geometry.vertices = vertices;
+
+    triangles = THREE.ShapeUtils.triangulateShape ( vertices, holes );
+    console.log('triangles', triangles);
+
+    // for( var i = 0; i < triangles.length; i++ ){
+    //     geometry.faces.push( new THREE.Face3( triangles[i][0], triangles[i][1], triangles[i][2] ));
+    // }
+
+    geometry.faces.push(new THREE.Face3(0,1,2));//[0] - сторона 0 (front)
+    geometry.faces.push(new THREE.Face3(0,2,3));//[1] - сторона 0 (front)
+    geometry.faces.push(new THREE.Face3(1,5,6));//[2] - сторона 1 (right) 
+    geometry.faces.push(new THREE.Face3(1,6,2));//[3] - сторона 1 (right)
+    geometry.faces.push(new THREE.Face3(3,2,6));//[2] - сторона 2 (top) 
+    geometry.faces.push(new THREE.Face3(3,6,7));//[3] - сторона 2 (top)
+    geometry.faces.push(new THREE.Face3(0,4,7));//[2] - сторона 3 (left) 
+    geometry.faces.push(new THREE.Face3(0,7,3));//[3] - сторона 3 (left)
+    geometry.faces.push(new THREE.Face3(0,1,5));//[2] - сторона 4 (bottom) 
+    geometry.faces.push(new THREE.Face3(0,5,4));//[3] - сторона 4 (bottom)
+    geometry.faces.push(new THREE.Face3(4,5,6));//[2] - сторона 5 (back) 
+    geometry.faces.push(new THREE.Face3(4,6,7));//[3] - сторона 5 (back)
+
+    console.log('geometry.faces', geometry.faces)
+
+    this.mesh = new THREE.Mesh( geometry, material );
+    
+    console.log('this.mesh', this.mesh)
+
+    this.scene.add(this.mesh)
+
 // this.start()
 this.renderScene()
   }
@@ -77,12 +124,40 @@ render(){
             this.setState({height: this.state.height+1});
             this.setState({long: this.state.long+1});
             console.log('this.state.width ', this.state.width);
-            this.cube.position.x = -4
+            // this.cube.position.x = -1
+
+            //write vertices
+            this.mesh.geometry.vertices.map((a)=>{
+              console.log(a.x);
+              console.log(a.y);
+              console.log(a.z);
+            })
+            this.mesh.rotation.x += 0.5;
+            this.mesh.rotation.y += 0.5;
+            this.mesh.rotation.z += 0.5;
+
+            console.log('this.cube.geometry.vertices ', this.mesh.geometry.vertices)
+            console.log('findNearPoint ', this.findNearPoint(this.mesh.geometry.vertices))
+
             this.renderScene()
+            console.log('this.cube.geometry.vertices1 ', this.mesh.geometry.vertices)
           }
         }>111</button>
       </div>
     )
   }
+
+  findNearPoint = (points) => {
+    //find a point with a max coordinate z
+    let max = 0
+    if (!points) return null
+    points.map(( a, i) => {
+      if (points[max].z < a.z){
+        max = i
+      }
+    })
+    return max
+  }
+
 }
 export default ThreeScene
