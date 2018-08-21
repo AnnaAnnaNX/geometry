@@ -20,12 +20,18 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
    constructor(props) {
     super(props);
     this.state = {
-      x: null,
-      y: null,
-      z: null,
-      w: null,
-      h: null,
-      d: null,
+      // x: null,
+      // y: null,
+      // z: null,
+      // w: null,
+      // h: null,
+      // d: null,
+      x: 0,
+      y: 0,
+      z: 0,
+      w: 1,
+      h: 1,
+      d: 1,
       points: undefined 
       // [
       //   [0, 0, 0],

@@ -17,13 +17,18 @@ class ThreeScene extends Component{
   }
 
   draw = () => {
+    //clear scene
+    while(this.scene.children.length > 0){ 
+        this.scene.remove(this.scene.children[0]); 
+    }
+
     let geometry = new THREE.Geometry();
     // let material = new THREE.MeshNormalMaterial()
     let material = new THREE.MeshBasicMaterial({
         color: 0xff0000,
         wireframe: true
     });
-    
+
     let vertices = [0,1,2,3,4,5,6,7].map(i=>new THREE.Vector3(...this.props.points[i]))
     let holes = []
     let triangles, mesh;
