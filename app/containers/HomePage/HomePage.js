@@ -68,13 +68,13 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     }
   }
 
-  handleChange = name => event => {
+  handleChange = name => event => {console.log(111);
     this.setState({
       [name]: event.target.value,
     });
   };
 
- handleChange = name => event => {
+ handleChangeCheckbox = name => event => {
     if (!this.state.selectedFaces.includes(name))
       this.setState({ selectedFaces: [...this.state.selectedFaces, name] })
     else{
@@ -164,19 +164,19 @@ function draw() {
                  <FormGroup>
                   <FormControlLabel
                     control={
-                      <Checkbox checked={this.state.selectedFaces.includes(0)} onChange={this.handleChange(0)} />
+                      <Checkbox checked={this.state.selectedFaces.includes(0)} onChange={this.handleChangeCheckbox(0)} />
                     }
                     label="0 - front"//front
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox checked={this.state.selectedFaces.includes(1)} onChange={this.handleChange(1)} />
+                      <Checkbox checked={this.state.selectedFaces.includes(1)} onChange={this.handleChangeCheckbox(1)} />
                     }
                     label="1 - right"//torightp
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox checked={this.state.selectedFaces.includes(2)} onChange={this.handleChange(2)} />
+                      <Checkbox checked={this.state.selectedFaces.includes(2)} onChange={this.handleChangeCheckbox(2)} />
                     }
                     label="2 - top"//top
                   />
@@ -185,19 +185,19 @@ function draw() {
                  <FormGroup>
                   <FormControlLabel
                     control={
-                      <Checkbox checked={this.state.selectedFaces.includes(3)} onChange={this.handleChange(3)} />
+                      <Checkbox checked={this.state.selectedFaces.includes(3)} onChange={this.handleChangeCheckbox(3)} />
                     }
                     label="3 - left"//front
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox checked={this.state.selectedFaces.includes(4)} onChange={this.handleChange(4)} />
+                      <Checkbox checked={this.state.selectedFaces.includes(4)} onChange={this.handleChangeCheckbox(4)} />
                     }
                     label="4 - bottom"//top
                   />
                   <FormControlLabel
                     control={
-                      <Checkbox checked={this.state.selectedFaces.includes(5)} onChange={this.handleChange(5)} />
+                      <Checkbox checked={this.state.selectedFaces.includes(5)} onChange={this.handleChangeCheckbox(5)} />
                     }
                     label="5 - back"//top
                   />
