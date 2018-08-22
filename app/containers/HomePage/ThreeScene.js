@@ -12,7 +12,7 @@ class ThreeScene extends Component{
     };
   }
 
-  componentWillReceiveProps({points}) {console.log('new props');
+  componentWillReceiveProps({points}) {console.log('new props ThreeScene');
     this.setState({...this.state,points})
   }
 

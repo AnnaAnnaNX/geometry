@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import ReposList from 'components/ReposList';
 import ThreeScene from './ThreeScene';
+import SVGScene from './SVGScene';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -171,13 +172,13 @@ function draw() {
                     control={
                       <Checkbox checked={this.state.selectedFaces.includes(1)} onChange={this.handleChange(1)} />
                     }
-                    label="1 -top"//top
+                    label="1 - right"//torightp
                   />
                   <FormControlLabel
                     control={
                       <Checkbox checked={this.state.selectedFaces.includes(2)} onChange={this.handleChange(2)} />
                     }
-                    label="2 -right"//top
+                    label="2 - top"//top
                   />
                 </FormGroup>
 
@@ -231,7 +232,13 @@ function draw() {
             >Add cube</Button>
         </div>
 
-        <ThreeScene points = {this.state.points}></ThreeScene>
+
+        <div style={{width: '55%', float: 'left', border: '1px solid red'}}>
+          <ThreeScene points = {this.state.points}></ThreeScene>
+        </div>
+        <div style={{width: '40%', float: 'left', border: '1px solid red'}}>
+          <SVGScene points = {this.state.points} selectedFaces={this.state.selectedFaces}></SVGScene>
+        </div>
         <div className="home-page">
 
         </div>
